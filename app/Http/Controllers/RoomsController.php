@@ -34,22 +34,8 @@ class RoomsController extends Controller
 
         return response()->json([
             'mensagem' => 'Quarto criado com sucesso.',
-            'dados' => $room
         ], 201);
     }
 
-    public function show(string $id)
-    {
-        //
-    }
 
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    public function destroy(string $id)
-    {
-        //
-    }
 }

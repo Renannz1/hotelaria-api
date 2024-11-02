@@ -86,7 +86,7 @@ class HotelController extends Controller
         $hotel->delete();
 
         return response()->json([
-            'mensagem' => 'Hotel deletado com sucesso.'
+            'mensagem' => 'Hotel deletado.'
         ], 200);
     }
 }

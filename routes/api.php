@@ -1,11 +1,15 @@
 <?php
 
+use App\Http\Controllers\controllerapi;
 use App\Http\Controllers\HotelController;
+use App\Http\Controllers\HotelsController;
+use App\Http\Controllers\RoomController;
+use App\Http\Controllers\RoomsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::post('/hotel', [HotelController::class, 'detailHotel'])->name('detailHotel');
-Route::get('/hotels', [HotelController::class, 'listHotels'])->name('listHotels');
-Route::post('/add-hotel', [HotelController::class, 'addHotel'])->name('addHotel');
-Route::put('/update-hotel', [HotelController::class, 'updateHotel'])->name('updateHotel');
-Route::delete('/delete-hotel/{id}', [HotelController::class, 'deleteHotel'])->name('deleteHotel');
+
+// rotas api resource
+Route::apiResource('/hotel', HotelController::class);
+Route::apiResource('/room', RoomsController::class);
+

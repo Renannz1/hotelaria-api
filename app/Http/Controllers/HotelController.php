@@ -7,85 +7,78 @@ use Illuminate\Http\Request;
 
 class HotelController extends Controller
 {
-    public function addHotel(Request $request){
-        $hotel = New Hotel();
-        $hotel->name = $request->name;
-        $hotel->save();
-
-        return response()->json([
-            'status' => 'ok',
-            'mensagem' => 'Hotel adicionado com sucesso!',
-            'dados' => $hotel,
-        ], 200);
-    }
-
-    public function detailHotel(Request $request){
-        if(!$request->id){
-            response()->json([
-                'status' => 'error',
-                'mensagem' => 'ID do hotel necessário.',
-            ], 400);
-        }
-
-        $hotel = Hotel::find($request->id);
-
-        if(!$hotel){
-            response()->json([
-                'status' => 'error',
-                'mensagem' => 'Hotel não encontrado.',
-            ], 400);
-        }
-
-        return response()->json([
-            'status' => 'ok',
-            'mensagem' => 'Hotel encontrado.',
-            'dados' => $hotel,
-        ], 200);
-    }
-
-    public function listHotels(){
+    public function index()
+    {
         $hotels = Hotel::all();
 
         return response()->json([
-            'status' => 'ok',
-            'mensagem' => 'Lista de Hoteis ativos.',
             'dados' => $hotels,
         ], 200);
     }
 
-    public function updateHotel(Request $request){
-        if(!$request->id){
-            return response()->json([
-                'status' => 'error',
-                'mensagem' => 'ID do hotel necessário.',
-            ], 400);
-        }
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string'
+        ]);
 
-        $hotel = Hotel::find($request->id);
+        $hotel = New Hotel();
+        $hotel->name = $request->name;
+
+        if($hotel->save()){
+            return response()->json([
+                'mensagem' => 'Hotel adicionado com sucesso!',
+            ], 201);
+        } else {
+            return response()->json([
+                'mensagem' => 'Falha ao adicionar Hotel.'
+            ], 500);
+        }
+    }
+
+    public function show(string $id)
+    {
+        $hotel = Hotel::find($id);
 
         if(!$hotel){
-            return response()->json([
-                'status' => 'error',
+            response()->json([
                 'mensagem' => 'Hotel não encontrado.',
             ], 400);
         }
+
+        return response()->json([
+            'dados' => $hotel,
+        ], 200);
+    }
+
+    public function update(Request $request, string $id)
+    {
+        $hotel = Hotel::find($id);
+
+        if(!$hotel){
+            return response()->json([
+                'mensagem' => 'Hotel não encontrado.',
+            ], 400);
+        }
+
+        $request->validate([
+            'name' => 'required|string'
+        ]);
 
         $hotel->name = $request->name;
         $hotel->save();
 
         return response()->json([
-            'status' => 'ok',
-            'mensagem' => 'Hotel atualizado com sucesso.',
             'dados' => $hotel,
         ], 200);
     }
 
-    public function deleteHotel($id){
+    public function destroy(string $id)
+    {
         $hotel = Hotel::find($id);
 
         if (!$hotel) {
             return response()->json([
-                'staus' => 'error',
                 'mensagem' => 'Hotel não encontrado.'
             ], 400);
         }
@@ -93,9 +86,7 @@ class HotelController extends Controller
         $hotel->delete();
 
         return response()->json([
-            'status' => 'ok',
-            'mensagem' => 'Hotel deletado com sucesso.'
+            'mensagem' => 'Hotel deletado.'
         ], 200);
     }
-
 }

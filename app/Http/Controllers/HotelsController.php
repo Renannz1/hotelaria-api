@@ -18,7 +18,22 @@ class HotelsController extends Controller
 
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string'
+        ]);
+
+        $hotel = New Hotel();
+        $hotel->name = $request->name;
+
+        if($hotel->save()){
+            return response()->json([
+                'mensagem' => 'Hotel adicionado com sucesso!',
+            ], 201);
+        } else {
+            return response()->json([
+                'mensagem' => 'Falha ao adicionar Hotel.'
+            ], 500);
+        }
     }
 
     public function show(string $id)

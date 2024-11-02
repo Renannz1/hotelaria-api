@@ -11,7 +11,11 @@ class RoomsController extends Controller
 
     public function index()
     {
-        //
+        $rooms = Room::all();
+
+        return response()->json([
+            'dados' => $rooms,
+        ], 200);
     }
 
     public function store(Request $request)

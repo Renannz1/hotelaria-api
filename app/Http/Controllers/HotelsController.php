@@ -56,12 +56,26 @@ class HotelsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $hotel = Hotel::find($id);
+
+        if(!$hotel){
+            return response()->json([
+                'mensagem' => 'Hotel não encontrado.',
+            ], 400);
+        }
+
+        $request->validate([
+            'name' => 'required|string'
+        ]);
+
+        $hotel->name = $request->name;
+        $hotel->save();
+
+        return response()->json([
+            'dados' => $hotel,
+        ], 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         //

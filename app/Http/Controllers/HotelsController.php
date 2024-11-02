@@ -38,7 +38,17 @@ class HotelsController extends Controller
 
     public function show(string $id)
     {
-        //
+        $hotel = Hotel::find($id);
+
+        if(!$hotel){
+            response()->json([
+                'mensagem' => 'Hotel não encontrado.',
+            ], 400);
+        }
+
+        return response()->json([
+            'dados' => $hotel,
+        ], 200);
     }
 
     /**

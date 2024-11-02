@@ -20,27 +20,7 @@ class HotelController extends Controller
     }
 
     public function detailHotel(Request $request){
-        if(!$request->id){
-            response()->json([
-                'status' => 'error',
-                'mensagem' => 'ID do hotel necessário.',
-            ], 400);
-        }
 
-        $hotel = Hotel::find($request->id);
-
-        if(!$hotel){
-            response()->json([
-                'status' => 'error',
-                'mensagem' => 'Hotel não encontrado.',
-            ], 400);
-        }
-
-        return response()->json([
-            'status' => 'ok',
-            'mensagem' => 'Hotel encontrado.',
-            'dados' => $hotel,
-        ], 200);
     }
 
     public function listHotels(){

@@ -75,4 +75,21 @@ class RoomsController extends Controller
         ]);
     }
 
+    public function destroy(string $id)
+    {
+        $room = Room::find($id);
+
+        if(!$room){
+            return response()->json([
+                'mensagem' => 'Quarto não encontrado.'
+            ], 400);
+        }
+
+        $room->delete();
+
+        return response()->json([
+            'mensagem' => 'Quarto deletado.'
+        ], 200);
+    }
 }
+

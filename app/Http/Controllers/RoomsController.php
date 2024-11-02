@@ -52,4 +52,27 @@ class RoomsController extends Controller
         ], 200);
     }
 
+    public function update(Request $request, string $id)
+    {
+        $room = Room::find($id);
+
+        if (!$room){
+            return response()->json([
+                'mensagem' => 'Quarto não encontrado.'
+            ], 400);
+        }
+
+
+        $request->validate([
+            'name' => 'required|string'
+        ]);
+
+        $room->name = $request->name;
+        $room->save();
+
+        return response()->json([
+            'mensagem' => 'Quarto atualizado.'
+        ]);
+    }
+
 }

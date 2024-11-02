@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Hotel extends Model
+class Room extends Model
 {
     use SoftDeletes;
 
-    public function rooms(){
-        return $this->hasMany(Room::class);
+    public function hotel(){
+        // Quarto pertence a um Hotel
+        return $this->belongsTo(Hotel::class);
     }
 }

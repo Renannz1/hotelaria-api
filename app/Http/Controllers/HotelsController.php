@@ -51,9 +51,6 @@ class HotelsController extends Controller
         ], 200);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         $hotel = Hotel::find($id);
@@ -78,6 +75,18 @@ class HotelsController extends Controller
 
     public function destroy(string $id)
     {
-        //
+        $hotel = Hotel::find($id);
+
+        if (!$hotel) {
+            return response()->json([
+                'mensagem' => 'Hotel não encontrado.'
+            ], 400);
+        }
+
+        $hotel->delete();
+
+        return response()->json([
+            'mensagem' => 'Hotel deletado com sucesso.'
+        ], 200);
     }
 }

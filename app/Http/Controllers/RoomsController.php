@@ -37,5 +37,19 @@ class RoomsController extends Controller
         ], 201);
     }
 
+    public function show(string $id)
+    {
+        $hotel = Hotel::find($id);
+
+        if(!$hotel){
+            return response()->json([
+                'mensagem' => 'Quarto não encontrado.',
+            ], 400);
+        }
+
+        return response()->json([
+            'dados' => $hotel
+        ], 200);
+    }
 
 }

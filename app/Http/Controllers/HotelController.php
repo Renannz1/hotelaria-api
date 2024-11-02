@@ -50,4 +50,14 @@ class HotelController extends Controller
         ], 200);
     }
 
+    public function listHotels(){
+        $hotels = Hotel::all();
+
+        return response()->json([
+            'status' => 'ok',
+            'mensagem' => 'Lista de Hoteis ativos.',
+            'dados' => $hotels,
+        ], 200);
+    }
+
 }

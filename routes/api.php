@@ -6,6 +6,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/test', [HotelController::class, 'test'])->name('test');
 Route::post('/hotel', [HotelController::class, 'detailHotel'])->name('detailHotel');
+Route::get('/hotels', [HotelController::class, 'listHotels'])->name('listHotels');
 Route::post('/add-hotel', [HotelController::class, 'addHotel'])->name('addHotel');
-
 

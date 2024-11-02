@@ -7,13 +7,6 @@ use Illuminate\Http\Request;
 
 class HotelController extends Controller
 {
-    public function test(){
-        return response()->json([
-                'status' => 'ok',
-                'message' => 'API rodando com sucesso!',
-            ], 200);
-    }
-
     public function addHotel(Request $request){
         $hotel = New Hotel();
         $hotel->name = $request->name;
@@ -57,6 +50,33 @@ class HotelController extends Controller
             'status' => 'ok',
             'mensagem' => 'Lista de Hoteis ativos.',
             'dados' => $hotels,
+        ], 200);
+    }
+
+    public function updateHotel(Request $request){
+        if(!$request->id){
+            return response()->json([
+                'status' => 'error',
+                'mensagem' => 'ID do hotel necessário.',
+            ], 400);
+        }
+
+        $hotel = Hotel::find($request->id);
+
+        if(!$hotel){
+            return response()->json([
+                'status' => 'error',
+                'mensagem' => 'Hotel não encontrado.',
+            ], 400);
+        }
+
+        $hotel->name = $request->name;
+        $hotel->save();
+
+        return response()->json([
+            'status' => 'ok',
+            'mensagem' => 'Hotel atualizado com sucesso.',
+            'dados' => $hotel,
         ], 200);
     }
 

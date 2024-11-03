@@ -2,7 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Hotel;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 use SimpleXMLElement;
 
 class ImportXml extends Command
@@ -26,11 +28,24 @@ class ImportXml extends Command
         // var_dump($xmlConteudo);
         // var_dump($xml);
 
-        foreach($xml->Hotel as $hotel){
+        foreach ($xml->Hotel as $hotel) {
             echo $hotel->Name . "\n";
         }
 
+        try {
+            DB::beginTransaction();
+            foreach ($xml->Hotel as $hotel) {
+                $name = (string) $hotel->Name;
+
+                Hotel::create([
+                    'name' => $name,
+                ]);
+            }
+            DB::commit();
+            $this->info("Importação dos dados do arquivo XML realizada com sucesso.");
+        } catch (\Exception $e) {
+            DB::rollBack();
+            $this->error("Erro ao importar os dados do arquivo XML para o banco de dados.");
+        }
     }
-
-
 }

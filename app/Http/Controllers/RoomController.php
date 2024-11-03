@@ -23,6 +23,6 @@ class RoomController extends Controller
         return response()->json([
             'mensagem' => 'Quarto criado com sucesso.',
             'dados' => $room,
-        ], 201);
+        ], 20);
     }
 }

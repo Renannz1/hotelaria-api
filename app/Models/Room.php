@@ -13,4 +13,8 @@ class Room extends Model
         // Quarto pertence a um Hotel
         return $this->belongsTo(Hotel::class);
     }
+
+    protected $fillable = [
+            'name'
+    ];
 }

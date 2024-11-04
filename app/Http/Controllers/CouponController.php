@@ -71,6 +71,17 @@ class CouponController extends Controller
 
     public function destroy(string $id)
     {
-        //
+        $coupon = Coupon::find($id);
+
+        if (!$coupon) {
+            return response()->json([
+                'mensagem' => 'coupon nao encontrado'
+            ], 404);
+        }
+
+        $coupon->delete();
+        return response()->json([
+            'mensagem' => 'coupon removido com sucesso.'
+        ], 200);
     }
 }

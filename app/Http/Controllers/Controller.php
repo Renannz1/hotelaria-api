@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
  * @OA\Info(
  *      version="1.0.0",
  *      title="API FOCO",
- *      description="Documentação dos endpoints da API",
+ *      description="Documetação dos endpoints da API.",
  *      @OA\Contact(
  *          email="renanpereirareis@gmail.com"
  *      ),

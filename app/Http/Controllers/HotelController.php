@@ -66,15 +66,12 @@ class HotelController extends Controller
         $hotel = new Hotel();
         $hotel->name = $request->name;
 
-        if ($hotel->save()) {
-            return response()->json([
-                'mensagem' => 'Hotel adicionado com sucesso!',
-            ], 201);
-        } else {
-            return response()->json([
-                'mensagem' => 'Falha ao adicionar Hotel.'
-            ], 500);
-        }
+        $hotel->save();
+
+        return response()->json(
+        [
+            'mensagem' => 'Hotel adicionado com sucesso!',
+        ], 201);
     }
 
     /**
@@ -165,7 +162,7 @@ class HotelController extends Controller
         $hotel->save();
 
         return response()->json([
-            'dados' => $hotel,
+            'mensagem' => 'Hotel atualizado com sucesso',
         ], 200);
     }
 

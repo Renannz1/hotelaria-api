@@ -200,6 +200,146 @@
                     }
                 }
             }
+        },
+        "/api/rooms": {
+            "get": {
+                "tags": [
+                    "Rooms"
+                ],
+                "operationId": "bea681612754126f01807ff95647eb34",
+                "responses": {
+                    "200": {
+                        "description": "Retorna uma lista de quartos"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Rooms"
+                ],
+                "operationId": "cd6c1029f22e2425a1f99cf83e27383a",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "hotel_id": {
+                                        "description": "ID do hotel",
+                                        "type": "integer"
+                                    },
+                                    "name": {
+                                        "description": "Nome do quarto",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Quarto criado com sucesso"
+                    },
+                    "400": {
+                        "description": "Hotel não encontrado"
+                    },
+                    "500": {
+                        "description": "Falha ao criar quarto"
+                    }
+                }
+            }
+        },
+        "/api/rooms/{id}": {
+            "get": {
+                "tags": [
+                    "Rooms"
+                ],
+                "operationId": "91a59d880bb0297e8321dd75af8f506b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retorna os dados de um quarto específico"
+                    },
+                    "400": {
+                        "description": "Quarto não encontrado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Rooms"
+                ],
+                "operationId": "c489811fdd25dfe273cf9a5bc3b5d386",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "Nome do quarto",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Quarto atualizado com sucesso"
+                    },
+                    "400": {
+                        "description": "Quarto não encontrado"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Rooms"
+                ],
+                "operationId": "61024891be80949c0aaa6e4536381225",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Quarto deletado com sucesso"
+                    },
+                    "400": {
+                        "description": "Quarto não encontrado"
+                    }
+                }
+            }
         }
     },
     "tags": [
@@ -210,6 +350,10 @@
         {
             "name": "Reserves",
             "description": "Endpoints: Reserves"
+        },
+        {
+            "name": "Rooms",
+            "description": "Endpoints: Rooms"
         }
     ]
 }

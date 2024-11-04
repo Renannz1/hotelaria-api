@@ -149,6 +149,10 @@ class HotelController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $request->validate([
+            'name' => 'required|string'
+        ]);
+
         $hotel = Hotel::find($id);
 
         if (!$hotel) {
@@ -156,10 +160,6 @@ class HotelController extends Controller
                 'mensagem' => 'Hotel não encontrado.',
             ], 400);
         }
-
-        $request->validate([
-            'name' => 'required|string'
-        ]);
 
         $hotel->name = $request->name;
         $hotel->save();

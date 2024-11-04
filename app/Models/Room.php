@@ -15,7 +15,7 @@ class Room extends Model
     }
 
     // quarto tem varias reservas
-    public function reserve(){
+    public function reserves(){
         return $this->hasMany(Reserve::class);
     }
 

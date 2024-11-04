@@ -12,19 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('reserves', function (Blueprint $table) {
-            $table->softDeletes();
-        });
-
-        Schema::table('deilies', function (Blueprint $table) {
-            $table->softDeletes();
-        });
-
-        Schema::table('guests', function (Blueprint $table) {
-            $table->softDeletes();
-        });
-
-        Schema::table('payments', function (Blueprint $table) {
-            $table->softDeletes();
+            $table->date('check_out')->nullable()->change();
         });
     }
 
@@ -33,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('reserve', function (Blueprint $table) {
+        Schema::table('reserves', function (Blueprint $table) {
             //
         });
     }

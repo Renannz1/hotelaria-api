@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "API FOCO",
-        "description": "API FOCO",
+        "description": "Documetação dos endpoints da API.",
         "contact": {
             "email": "renanpereirareis@gmail.com"
         },

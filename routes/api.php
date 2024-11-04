@@ -15,3 +15,6 @@ Route::apiResource('/room', RoomController::class);
 Route::apiResource('/reserve', ReserveController::class);
 Route::apiResource('/coupon', CouponController::class);
 
+
+Route::put('/coupon-off/{id_coupon}', [CouponController::class, 'couponOff']);
+

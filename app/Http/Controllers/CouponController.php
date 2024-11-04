@@ -84,4 +84,22 @@ class CouponController extends Controller
             'mensagem' => 'coupon removido com sucesso.'
         ], 200);
     }
+
+    public function couponOff($id){
+        $coupon = Coupon::find($id);
+
+        if (!$coupon) {
+            return response()->json([
+                'mensagem' => 'coupon nao encontrado.'
+            ], 404);
+        }
+
+        $coupon->status = false;
+        $coupon->save();
+
+        return response()->json([
+            'mensagem' => 'coupon desativado.',
+        ], 404);
+    }
+
 }

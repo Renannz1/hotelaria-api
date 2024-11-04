@@ -26,6 +26,10 @@ class Reserve extends Model
         return $this->hasMany(Payment::class);
     }
 
+    public function coupon(){
+        $this->belongsTo(Coupon::class);
+    }
+
     protected $fillable = [
         'hotel_id',
         'room_id',

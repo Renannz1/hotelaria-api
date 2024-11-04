@@ -11,5 +11,5 @@ use Illuminate\Support\Facades\Route;
 
 // rotas api resource
 Route::apiResource('/hotel', HotelController::class);
-Route::apiResource('/room', RoomsController::class);
+Route::apiResource('/room', RoomController::class);
 

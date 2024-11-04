@@ -23,7 +23,7 @@ return new class extends Migration
 
         Schema::table('reserves', function (Blueprint $table) {
             $table->unsignedBigInteger('coupon_id')->nullable();
-            $table->foreign('coupon_id')->references('id')->on('cupons')->onUpdate('cascade');
+            $table->foreign('coupon_id')->references('id')->on('cupons')->onUpdate('cascade')->onDelete('set null');
         });
     }
 

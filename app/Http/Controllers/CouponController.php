@@ -51,6 +51,12 @@ class CouponController extends Controller
 
     public function update(Request $request, string $id)
     {
+        $request->validate([
+            'code' => 'required|string|unique:coupons,code',
+            'discount_value' => 'required|numeric',
+            'expiration_date' => 'nullable|date|after:today'
+        ]);
+
         $coupon = Coupon::find($id);
 
         if(!$coupon){

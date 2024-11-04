@@ -9,7 +9,10 @@ class CouponController extends Controller
 {
     public function index()
     {
-
+        $coupons = Coupon::all();
+        return response()->json([
+            'dados' => $coupons
+        ], 200);
     }
 
     public function store(Request $request)

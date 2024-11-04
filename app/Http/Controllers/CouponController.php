@@ -102,4 +102,20 @@ class CouponController extends Controller
         ], 404);
     }
 
+    public function couponOn($id){
+        $coupon = Coupon::find($id);
+
+        if (!$coupon) {
+            return response()->json([
+                'mensagem' => 'coupon nao encontrado.'
+            ], 404);
+        }
+
+        $coupon->status = true;
+        $coupon->save();
+
+        return response()->json([
+            'mensagem' => 'coupon ativado.',
+        ], 200);
+    }
 }

@@ -1,7 +1,23 @@
 <?php
 
 namespace App\Http\Controllers;
-
+/**
+ * @OA\Server(url="http://localhost/api/"),
+ * @OA\Info(
+ *      version="1.0.0",
+ *      title="API FOCO",
+ *      description="API FOCO",
+ *      @OA\Contact(
+ *          email="abaporu@gmail.com"
+ *      ),
+ *     @OA\License(
+ *         name="Apache 2.0",
+ *         url="https://www.apache.org/licenses/LICENSE-2.0.html"
+ *     )
+ * ),
+ *
+ *
+ */
 abstract class Controller
 {
     //

@@ -17,7 +17,7 @@ class ReserveController extends Controller
 {
     /**
      * @OA\Get(
-     *     path="/reserves",
+     *     path="/api/reserves",
      *     tags={"Reserves"},
      *     @OA\Response(
      *         response=200,
@@ -36,7 +36,7 @@ class ReserveController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/reserves",
+     *     path="/api/reserves",
      *     tags={"Reserves"},
      *     @OA\RequestBody(
      *         required=true,

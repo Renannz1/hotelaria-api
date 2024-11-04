@@ -151,12 +151,12 @@
                 }
             }
         },
-        "/reserves": {
+        "/api/reserves": {
             "get": {
                 "tags": [
                     "Reserves"
                 ],
-                "operationId": "9c2cec66ad1548bc257a3adf5970cc71",
+                "operationId": "a232329873e7ba3203ef47e1cf6c61c3",
                 "responses": {
                     "200": {
                         "description": "Retorna uma lista de reservas"
@@ -167,7 +167,7 @@
                 "tags": [
                     "Reserves"
                 ],
-                "operationId": "4ba003f9d079f779e2e6bd1c23ee7318",
+                "operationId": "da7ba2a2c840a8e8d699e4fa1ec93c06",
                 "requestBody": {
                     "required": true,
                     "content": {

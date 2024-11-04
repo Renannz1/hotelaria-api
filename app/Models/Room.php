@@ -9,12 +9,18 @@ class Room extends Model
 {
     use SoftDeletes;
 
+    // quarto pertence a um Hotel
     public function hotel(){
-        // Quarto pertence a um Hotel
         return $this->belongsTo(Hotel::class);
     }
 
+    // quarto tem varias reservas
+    public function reserve(){
+        return $this->hasMany(Reserve::class);
+    }
+
     protected $fillable = [
-            'name'
+            'name',
+            'hotel_id'
     ];
 }

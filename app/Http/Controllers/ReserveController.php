@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Coupon;
 use App\Models\Hotel;
 use App\Models\Reserve;
 use App\Models\Room;
@@ -72,7 +73,8 @@ class ReserveController extends Controller
     {
         $request->validate([
             'room_id' => 'required|exists:rooms,id',
-            'total' => 'required|numeric'
+            'total' => 'required|numeric',
+            'coupon_code' => 'nullable|string|exists:coupons,code'
         ]);
 
         $room = Room::find($request->room_id);
@@ -92,8 +94,40 @@ class ReserveController extends Controller
 
         $room->reserves()->save($reserve);
 
+        $msgCuopon = 'Cupom não aplicado.';
+
+        if($request->filled('coupon_code')){
+            $this->applyCoupon($reserve, $request->coupon_code);
+            $msgCuopon = "Cupom $request->coupon_code aplicado.";
+        }
+
         return response()->json([
-            'mensagem' => 'Reserva criada com sucesso.'
+            'mensagem' => 'Reserva criada com sucesso.',
+            'cupom' => $msgCuopon
         ], 201);
+    }
+
+    public function applyCoupon(Reserve $reserve, $couponCode)
+    {
+        $coupon = Coupon::where('code', $couponCode)->first();
+
+        if(!$coupon || !$coupon->status ){
+            return response()->json([
+                'mensagem' => 'coupon invalido ou nao encontrado.'
+            ], 404);
+        }
+
+        if($coupon->expiration_date < now()){
+            return response()->json([
+                'mensagem' => 'coupon expirado'
+            ], 400);
+        }
+
+        $totalSemDescoto = $reserve->total;
+        $discountTotal = max(0, $reserve->total - $coupon->discount_value);
+
+        $reserve->coupon_id = $coupon->id;
+        $reserve->total = $discountTotal;
+        $reserve->save();
     }
 }

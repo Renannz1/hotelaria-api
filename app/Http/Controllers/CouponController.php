@@ -36,7 +36,17 @@ class CouponController extends Controller
 
     public function show(string $id)
     {
-        //
+        $coupon = Coupon::find($id);
+
+        if(!$coupon){
+            return response()->json([
+                'mensagem' => 'coupon não encontrado.'
+            ], 404);
+        }
+
+        return response()->json([
+            'dados' => $coupon
+        ], 200);
     }
 
     public function update(Request $request, string $id)

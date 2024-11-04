@@ -52,6 +52,11 @@ class ReserveController extends Controller
      *                 property="total",
      *                 type="number",
      *                 description="Total da reserva"
+     *             ),
+     *             @OA\Property(
+     *                 property="coupon_code",
+     *                 type="string",
+     *                 description="Código do cupom"
      *             )
      *         )
      *     ),
@@ -94,36 +99,36 @@ class ReserveController extends Controller
 
         $room->reserves()->save($reserve);
 
-        $msgCuopon = 'Cupom não aplicado.';
+        $msgCoupon = 'Cupom não aplicado.';
 
-        if($request->filled('coupon_code')){
+        if ($request->filled('coupon_code')) {
             $this->applyCoupon($reserve, $request->coupon_code);
-            $msgCuopon = "Cupom $request->coupon_code aplicado.";
+            $msgCoupon = "Cupom {$request->coupon_code} aplicado.";
         }
 
         return response()->json([
             'mensagem' => 'Reserva criada com sucesso.',
-            'cupom' => $msgCuopon
+            'cupom' => $msgCoupon
         ], 201);
     }
 
-    public function applyCoupon(Reserve $reserve, $couponCode)
+    private function applyCoupon(Reserve $reserve, $couponCode)
     {
         $coupon = Coupon::where('code', $couponCode)->first();
 
-        if(!$coupon || !$coupon->status ){
+        if (!$coupon || !$coupon->status) {
             return response()->json([
-                'mensagem' => 'coupon invalido ou nao encontrado.'
+                'mensagem' => 'Cupom inválido ou não encontrado.'
             ], 404);
         }
 
-        if($coupon->expiration_date < now()){
+        if ($coupon->expiration_date < now()) {
             return response()->json([
-                'mensagem' => 'coupon expirado'
+                'mensagem' => 'Cupom expirado'
             ], 400);
         }
 
-        $totalSemDescoto = $reserve->total;
+        $totalSemDesconto = $reserve->total;
         $discountTotal = max(0, $reserve->total - $coupon->discount_value);
 
         $reserve->coupon_id = $coupon->id;

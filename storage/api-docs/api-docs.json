@@ -18,6 +18,212 @@
         }
     ],
     "paths": {
+        "/api/coupons": {
+            "get": {
+                "tags": [
+                    "Coupons"
+                ],
+                "operationId": "de1c8db4ca4b3c683e03dffd02a9f448",
+                "responses": {
+                    "200": {
+                        "description": "Retorna uma lista de cupons"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Coupons"
+                ],
+                "operationId": "f3ffee4301fb5522bc31d0dd443a07e8",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "code": {
+                                        "description": "Código do cupom",
+                                        "type": "string"
+                                    },
+                                    "discount_value": {
+                                        "description": "Valor do desconto",
+                                        "type": "number"
+                                    },
+                                    "expiration_date": {
+                                        "description": "Data de expiração do cupom",
+                                        "type": "string",
+                                        "format": "date"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Cupom criado com sucesso"
+                    },
+                    "400": {
+                        "description": "Dados inválidos"
+                    }
+                }
+            }
+        },
+        "/api/coupons/{id}": {
+            "get": {
+                "tags": [
+                    "Coupons"
+                ],
+                "operationId": "fc0581b6388ac380af23011bb4ca9fdd",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retorna os dados de um cupom específico"
+                    },
+                    "404": {
+                        "description": "Cupom não encontrado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Coupons"
+                ],
+                "operationId": "057e26e126d3c2474c93f0ab7047a507",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "code": {
+                                        "description": "Código do cupom",
+                                        "type": "string"
+                                    },
+                                    "discount_value": {
+                                        "description": "Valor do desconto",
+                                        "type": "number"
+                                    },
+                                    "expiration_date": {
+                                        "description": "Data de expiração do cupom",
+                                        "type": "string",
+                                        "format": "date"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cupom atualizado com sucesso"
+                    },
+                    "404": {
+                        "description": "Cupom não encontrado"
+                    },
+                    "400": {
+                        "description": "Dados inválidos"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Coupons"
+                ],
+                "operationId": "17bea67ca5229520f7a6975f625ca627",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Cupom removido com sucesso"
+                    },
+                    "404": {
+                        "description": "Cupom não encontrado"
+                    }
+                }
+            }
+        },
+        "/api/coupons/{id}/off": {
+            "put": {
+                "tags": [
+                    "Coupons"
+                ],
+                "operationId": "6af578a39697ab1e5a297cb84e07204e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Cupom desativado com sucesso"
+                    },
+                    "404": {
+                        "description": "Cupom não encontrado"
+                    }
+                }
+            }
+        },
+        "/api/coupons/{id}/on": {
+            "put": {
+                "tags": [
+                    "Coupons"
+                ],
+                "operationId": "a32b2cf76267214f48974910bd2192df",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Cupom ativado com sucesso"
+                    },
+                    "404": {
+                        "description": "Cupom não encontrado"
+                    }
+                }
+            }
+        },
         "/api/hotels": {
             "get": {
                 "tags": [
@@ -181,6 +387,10 @@
                                     "total": {
                                         "description": "Total da reserva",
                                         "type": "number"
+                                    },
+                                    "coupon_code": {
+                                        "description": "Código do cupom",
+                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -343,6 +553,10 @@
         }
     },
     "tags": [
+        {
+            "name": "Coupons",
+            "description": "Endpoints: Coupons"
+        },
         {
             "name": "Hotels",
             "description": "Endpoints: Hotels"

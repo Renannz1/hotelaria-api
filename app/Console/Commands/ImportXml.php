@@ -108,7 +108,6 @@ class ImportXml extends Command
                             'phone' => $phone,
                             'reserve_id' => $reserveId
                         ],
-
                         [
                             'name' => $name,
                             'last_name' => $lastName,
@@ -137,7 +136,12 @@ class ImportXml extends Command
                     $method = (int) $payment->Method;
                     $value = (float) $payment->Value;
 
-                    Payment::create(
+                    Payment::firstOrCreate(
+                        [
+                            'reserve_id' => $reserveId,
+                            'method' => $method,
+                            'value' => $value
+                        ],
                         [
                             'reserve_id' => $reserveId,
                             'method' => $method,

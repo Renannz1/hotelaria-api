@@ -7,18 +7,66 @@ use App\Models\Reserve;
 use App\Models\Room;
 use Illuminate\Http\Request;
 
+/**
+ * @OA\Tag(
+ *     name="Reserves",
+ *     description="Endpoints: Reserves"
+ * )
+ */
 class ReserveController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * @OA\Get(
+     *     path="/reserves",
+     *     tags={"Reserves"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Retorna uma lista de reservas"
+     *     )
+     * )
      */
     public function index()
     {
-        //
+        $reserves = Reserve::all();
+
+        return response()->json([
+            'dados' => $reserves,
+        ], 200);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @OA\Post(
+     *     path="/reserves",
+     *     tags={"Reserves"},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(
+     *                 property="room_id",
+     *                 type="integer",
+     *                 description="ID do quarto"
+     *             ),
+     *             @OA\Property(
+     *                 property="total",
+     *                 type="number",
+     *                 description="Total da reserva"
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Reserva criada com sucesso"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Quarto não encontrado"
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Falha ao criar reserva"
+     *     )
+     * )
      */
     public function store(Request $request)
     {
@@ -29,9 +77,9 @@ class ReserveController extends Controller
 
         $room = Room::find($request->room_id);
 
-        if(!$room){
+        if (!$room) {
             return response()->json([
-                'mensagem' => 'quarto nao econtrado.'
+                'mensagem' => 'Quarto não encontrado.'
             ], 404);
         }
 
@@ -47,29 +95,5 @@ class ReserveController extends Controller
         return response()->json([
             'mensagem' => 'Reserva criada com sucesso.'
         ], 201);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

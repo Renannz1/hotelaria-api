@@ -8,7 +8,7 @@ namespace App\Http\Controllers;
  *      title="API FOCO",
  *      description="API FOCO",
  *      @OA\Contact(
- *          email="abaporu@gmail.com"
+ *          email="renanpereirareis@gmail.com"
  *      ),
  *     @OA\License(
  *         name="Apache 2.0",

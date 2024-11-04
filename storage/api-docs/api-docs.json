@@ -1,0 +1,215 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API FOCO",
+        "description": "API FOCO",
+        "contact": {
+            "email": "renanpereirareis@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost/api/"
+        }
+    ],
+    "paths": {
+        "/api/hotels": {
+            "get": {
+                "tags": [
+                    "Hotels"
+                ],
+                "operationId": "1f059609a9a7cdebad01e8494549cc8d",
+                "responses": {
+                    "200": {
+                        "description": "Retorna uma lista de hotéis"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Hotels"
+                ],
+                "operationId": "c8f412836761802038a38f7c95ad6c9e",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "Nome do hotel",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Hotel adicionado com sucesso"
+                    },
+                    "500": {
+                        "description": "Falha ao adicionar Hotel"
+                    }
+                }
+            }
+        },
+        "/api/hotels/{id}": {
+            "get": {
+                "tags": [
+                    "Hotels"
+                ],
+                "operationId": "32fa458e73403c0f53352a6162667196",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Retorna os dados de um hotel específico"
+                    },
+                    "400": {
+                        "description": "Hotel não encontrado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Hotels"
+                ],
+                "operationId": "05f1700e0699e62ac666298252adb116",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "Nome do hotel",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Hotel atualizado com sucesso"
+                    },
+                    "400": {
+                        "description": "Hotel não encontrado"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Hotels"
+                ],
+                "operationId": "d7cc9d4ced4fee467530e2b4017bc6c6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Hotel deletado com sucesso"
+                    },
+                    "400": {
+                        "description": "Hotel não encontrado"
+                    }
+                }
+            }
+        },
+        "/reserves": {
+            "get": {
+                "tags": [
+                    "Reserves"
+                ],
+                "operationId": "9c2cec66ad1548bc257a3adf5970cc71",
+                "responses": {
+                    "200": {
+                        "description": "Retorna uma lista de reservas"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Reserves"
+                ],
+                "operationId": "4ba003f9d079f779e2e6bd1c23ee7318",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "room_id": {
+                                        "description": "ID do quarto",
+                                        "type": "integer"
+                                    },
+                                    "total": {
+                                        "description": "Total da reserva",
+                                        "type": "number"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Reserva criada com sucesso"
+                    },
+                    "404": {
+                        "description": "Quarto não encontrado"
+                    },
+                    "500": {
+                        "description": "Falha ao criar reserva"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Hotels",
+            "description": "Endpoints: Hotels"
+        },
+        {
+            "name": "Reserves",
+            "description": "Endpoints: Reserves"
+        }
+    ]
+}

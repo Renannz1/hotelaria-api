@@ -32,42 +32,45 @@ class ImportXml extends Command
         $xml = new SimpleXMLElement($xmlConteudo);
 
         try {
-            // importar xml hotels ------------
             if ($xml->getName() === 'Hotels') {
-                foreach ($xml->Hotel as $hotel) {
-                    $hotelCode = (string) $hotel['id'];
-                    $name = (string) $hotel->Name;
-
-                    Hotel::updateOrCreate(
-                        ['id' => $hotelCode],
-                        ['name' => $name]
-                    );
-                }
-                $this->info("Importação dos dados do arquivo $file realizada com sucesso.");
+                $this->importarXmlHotels($xml);
+            } elseif ($xml->getName() === 'Rooms'){
+                $this->importarXmlRooms($xml);
             }
-            // ------------------------------
-
-
-            // importar xml rooms ------------
-            elseif ($xml->getName() === 'Rooms') {
-                foreach ($xml->Room as $room) {
-                    $roomCode = (int) $room['id'];
-                    $name = (string) $room->Name;
-                    $hotelCode = (int) $room['hotelCode'];
-
-                    Room::updateOrCreate(
-                        ['id' => $roomCode],
-                        [
-                            'hotel_id' => $hotelCode,
-                            'name' => $name
-                        ]
-                    );
-                }
-                $this->info("importacao dos dados do arquivo $file realizada com sucesso.");
-            }
-            // ------------------------------
         } catch (\Exception $e) {
             $this->error("erro ao importar os arquivos xml para o banco de dados." . $e->getMessage());
         }
     }
+
+    private function importarXmlHotels(SimpleXMLElement $xml){
+        foreach ($xml->Hotel as $hotel) {
+            $hotelCode = (string) $hotel['id'];
+            $name = (string) $hotel->Name;
+
+            Hotel::updateOrCreate(
+                ['id' => $hotelCode],
+                ['name' => $name]
+            );
+        }
+        $this->info("importacao do xml de hotels realizada com sucesso.");
+    }
+
+    private function importarXmlRooms(SimpleXMLElement $xml){
+        foreach ($xml->Room as $room) {
+            $roomCode = (int) $room['id'];
+            $name = (string) $room->Name;
+            $hotelCode = (int) $room['hotelCode'];
+
+            Room::updateOrCreate(
+                ['id' => $roomCode],
+                [
+                    'hotel_id' => $hotelCode,
+                    'name' => $name
+                ]
+            );
+        }
+        $this->info("importacao do xml de rooms realizada com sucesso.");
+    }
+
 }
+

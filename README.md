@@ -1,66 +1,125 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Sistema de Gerenciamento Hoteleiro
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Introdução
 
-## About Laravel
+Este projeto é um sistema de gerenciamento hoteleiro desenvolvido como parte de um desafio. Ele visa facilitar a administração de estabelecimentos hoteleiros.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Objetivos alcançados
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Modelagem do Banco de Dados
+- Estruturação do banco de dados com base nos arquivos XML fornecidos.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Script em PHP
+- Desenvolvimento de um script para recuperação de dados de arquivos XML e persistência no banco de dados.
 
-## Learning Laravel
+### API REST
+- Implementação de operações CRUD para quartos, hotéis e reservas.
+- Criação de endpoints para gerenciamento de cupons de desconto.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Documentação
+- Elaboração da documentação das rotas utilizando Swagger.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Padrões de Projeto
+- O projeto segue o modelo MVC (Model-View-Controller).
 
-## Laravel Sponsors
+### Controle de Versão
+- Utilização do Git para gerenciamento de versões.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Segurança
+- Implementação adequada dos verbos HTTP nas requisições.
+- Garantia da validação dos dados recebidos nas requisições.
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+## Modelo do Banco de Dados
+   - [Clique aqui](/arquivos/diagrama.png) para baixar o diagrama de classe do projeto.
+    
 
-## Contributing
+## Requisitos
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- PHP 8.1+
+- Composer
+- Laravel 11
+- Swagger
+- MySQL
 
-## Code of Conduct
+## Passo a passo para instalação
+1. Clone o repotório
+   - Utilize o seguinte código para clonar o repositório:
+    ```bash
+    git clone https://github.com/Renannz1/teste-foco-api
+    ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+3. Instale o Composer:
+   - É necessário instalar as dependencias do projeto utlizando:
+    ```bash
+    composer install
+    ```
 
-## Security Vulnerabilities
+4. Configure o arquivo `.env`:
+   - Após clonar o repositório, renomeie o arquivo .env.example para .env.
+   - Abra o arquivo .env e configure as credenciais do banco de dados conforme necessário.
+   - Crie um banco de dados no seu servidor de banco de dados (MySQL, PostgreSQL, etc.) correspondente ao que foi definido na configuração do .env. O comando para isso depende do sistema de gerenciamento de banco de dados em uso.
+     
+5. Execute as migrações para criar as tabelas no banco de dados:
+```bash
+php artisan migrate
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+5. Importar XMLs
+   - [Clicando aqui](/arquivos/xml.rar) para baixar a pasta `xml` com os arquivos xml.
+   - Cole a pasta `xml` nesse diretórtio `storage/app/`.
+   - Para importar os arquivos XML, execute o seguinte comando no terminal do projeto:
+    ```bash
+    php artisan command:import-xml-data storage/app/xml/hotels.xml storage/app/xml/reserves.xml storage/app/xml/rooms.xml
+    ```
 
-## License
+5. Para utilizar o Cron
+   - Acessar o servidor
+   - Conecte-se ao servidor onde a aplicação está hospedada para iniciar a configuração.
+   - Abra o Crontab
+   - No terminal, insira o seguinte comando para acessar o editor de agendamento de tarefas do sistema:
+    ```bash
+    sudo crontab -e
+    ```
+    - No final do arquivo insira o seguinte comando para executar o Cron, para que o script de importarção seja executado a cada 2 minutos.
+   ```bash
+    */2 * * * * /usr/bin/php /caminho/para/seu/projeto/artisan command:import-xml-data storage/app/xml/hotels.xml storage/app/xml/reserves.xml storage/app/xml/rooms.xml
+   ```
+   
+6. Para executar as rotas:
+    - As rotas a seguir são utilizadas para acessar diferentes recursos da API.
+    - Execute as rotas usando o Postman ou Insominia.
+    - Para acessar a documentação das rotas feito com swagger use a url:
+    ```bash
+    http://<sua_rota>/projeto_foco/public/api/documentation
+    ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Endpoints da API
+
+#### Cupons
+- GET|HEAD: `api/coupon`
+- POST: `api/coupon`
+- PUT: `api/coupon-off/{id_coupon}`
+- PUT: `api/coupon-on/{id_coupon}`
+- GET|HEAD: `api/coupon/{coupon}`
+- PUT|PATCH: `api/coupon/{coupon}`
+- DELETE: `api/coupon/{coupon}`
+
+#### Hotéis
+- GET|HEAD: `api/hotel`
+- POST: `api/hotel`
+- GET|HEAD: `api/hotel/{hotel}`
+- PUT|PATCH: `api/hotel/{hotel}`
+- DELETE: `api/hotel/{hotel}`
+
+#### Reservas
+- GET|HEAD: `api/reserve`
+- POST: `api/reserve`
+
+#### Quartos
+- GET|HEAD: `api/room`
+- POST: `api/room`
+- GET|HEAD: `api/room/{room}`
+- PUT|PATCH: `api/room/{room}`
+- DELETE: `api/room/{room}`

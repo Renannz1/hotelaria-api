@@ -67,7 +67,7 @@ php artisan migrate
 ```
 
 5. Importar XMLs
-   - [Clicando aqui](/arquivos/xml.rar) para baixar a pasta `xml` com os arquivos xml.
+   - [Clicando aqui](/arquivos/xml.rar) para baixar a pasta `xml` compactada com os arquivos xml.
    - Cole a pasta `xml` nesse diretórtio `storage/app/`.
    - Para importar os arquivos XML, execute o seguinte comando no terminal do projeto:
     ```bash

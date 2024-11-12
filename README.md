@@ -1,47 +1,54 @@
-# Sistema de Gerenciamento Hoteleiro
+# 🏨 Sistema de Gerenciamento Hoteleiro 🏨
 
-## Introdução
+## Bem-vindo ao meu projeto de gerenciamento hoteleiro! 😊
 
-Este projeto é um sistema de gerenciamento hoteleiro. Ele visa facilitar a administração de estabelecimentos hoteleiros.
+Este projeto é um sistema de gerenciamento hoteleiro, desenvolvido para facilitar a administração de estabelecimentos. O sistema possui controle de reservas, hóspedes e serviços, tornando a gestão mais eficiente. 📊
 
-## Objetivos alcançados
+## Principais Funcionalidades 🎯
 
-### Modelagem do Banco de Dados
-- Estruturação do banco de dados com base nos arquivos XML fornecidos.
+### Reservas 💺
+- Gerenciamento de reservas de quartos e serviços
+- Controle de disponibilidade em tempo real 🕒
 
-### Script em PHP
-- Desenvolvimento de um script para recuperação de dados de arquivos XML e persistência no banco de dados.
+### Hóspedes 👥
+- Manutenção de informações dos hóspedes
+- Gestão de preferências e histórico de reservas 📝
 
-### API REST
-- Implementação de operações CRUD para quartos, hotéis e reservas.
-- Criação de endpoints para gerenciamento de cupons de desconto.
+### Quartos 🛏️
+- Gerenciamento de quartos e tipos de acomodação
+- Controle de status e disponibilidade
 
-### Documentação
-- Elaboração da documentação das rotas utilizando Swagger.
+### Cupons de Desconto 🎁
+- Criação e gerenciamento de cupons promocionais
+- Ativação e inativação de cupons específicos
 
-
-### Padrões de Projeto
-- O projeto segue o modelo MVC (Model-View-Controller).
-
-### Controle de Versão
-- Utilização do Git para gerenciamento de versões.
-
-### Segurança
-- Implementação adequada dos verbos HTTP nas requisições.
-- Garantia da validação dos dados recebidos nas requisições.
-
-
-## Modelo do Banco de Dados
-   - [Clique aqui](/arquivos/diagrama.png) para baixar o diagrama de classe do projeto.
-    
-
-## Requisitos
+## Tecnologias Utilizadas 🔧
 
 - PHP 8.1+
-- Composer
-- Laravel 11
-- Swagger
-- MySQL
+- Composer 💼
+- Laravel 11 🌟
+- Swagger 📚
+- MySQL 🐙
+
+## Como Funciona? 🤔
+
+1. **Modelagem do Banco de Dados**:
+   - Estruturação do banco de dados com base nos arquivos XML fornecidos 📊
+
+2. **Desenvolvimento em PHP**:
+   - Implementação de um script para recuperação de dados de arquivos XML e persistência no banco de dados 💻
+
+3. **API REST**:
+   - Implementação de operações CRUD para quartos, hotéis e reservas 🔧
+   - Criação de endpoints para gerenciamento de cupons de desconto 🎁
+
+4. **Documentação**:
+   - Elaboração da documentação das rotas utilizando Swagger 📚
+
+## Modelo do Banco de Dados 🖼️
+[Clique aqui](/arquivos/diagrama.png) para baixar o diagrama de classe do projeto.
+
+## Como Instalar? 🛠️
 
 ## Passo a passo para instalação
 1. Clone o repotório
@@ -95,9 +102,9 @@ php artisan migrate
     http://<sua_rota>/projeto_foco/public/api/documentation
     ```
 
-### Endpoints da API
+## Endpoints da API 🌐
 
-#### Cupons
+### Cupons
 - GET|HEAD: `api/coupon`
 - POST: `api/coupon`
 - PUT: `api/coupon-off/{id_coupon}`
@@ -106,18 +113,18 @@ php artisan migrate
 - PUT|PATCH: `api/coupon/{coupon}`
 - DELETE: `api/coupon/{coupon}`
 
-#### Hotéis
+### Hotéis
 - GET|HEAD: `api/hotel`
 - POST: `api/hotel`
 - GET|HEAD: `api/hotel/{hotel}`
 - PUT|PATCH: `api/hotel/{hotel}`
 - DELETE: `api/hotel/{hotel}`
 
-#### Reservas
+### Reservas
 - GET|HEAD: `api/reserve`
 - POST: `api/reserve`
 
-#### Quartos
+### Quartos
 - GET|HEAD: `api/room`
 - POST: `api/room`
 - GET|HEAD: `api/room/{room}`

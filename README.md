@@ -2,7 +2,7 @@
 
 ## Introdução
 
-Este projeto é um sistema de gerenciamento hoteleiro desenvolvido como parte de um desafio. Ele visa facilitar a administração de estabelecimentos hoteleiros.
+Este projeto é um sistema de gerenciamento hoteleiro. Ele visa facilitar a administração de estabelecimentos hoteleiros.
 
 ## Objetivos alcançados
 
